@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class MakeAdminSeeder extends Seeder
 {
     /**
-     *  php artisan db:seed --class=admin
+     *  php artisan db:seed --class=MakeAdminSeeder
      */
     public function run(): void
     {

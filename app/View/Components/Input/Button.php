@@ -6,26 +6,27 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class FormGroup extends Component
+class Button extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct
-    (
+    public function __construct(
+        public string $submit,
+        public string $function,
         public string $id,
         public string $label,
-        public string $type,
-        public string $placeholder,
-        public string $name,
-        public string $icon,
+        public string $custom,
+
     )
-    {}
+    {
+    }
+
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.input.form-group');
+        return view('components.input.button');
     }
 }
