@@ -18,7 +18,7 @@ class MakeAdminSeeder extends Seeder
             'user_id'=> 123456789,
             'user_name' => 'admin',
             'user_email' => 'bujhuyanh150400@gmail.com',
-            'user_password' => '$2y$10$tag3q75nNWqoQqEUZ2hfi.bIXUnq1MyBf6FgQ7EpjPy0IcFS7NAJa', // admin
+            'user_password' => '$2a$12$tp6NEGEQTgGgj5dXqRHS4OfYtbw3FuwKpNmlFZoeojM8m1lemprG6', // admin1234
             'user_birth' => '1999-12-16 00:00:00',
             'user_department' => 1,
             'user_position' => 1,
