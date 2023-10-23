@@ -8,10 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::middleware('auth.admin')->group(function () {
+    Route::get('/admin', [DashboardController::class,'show'])->name('admin-dashboard');
     Route::get('/admin/login', [AuthController::class, 'show'])->name('show-login-admin');
-    Route::post('/admin/login', [AuthController::class, 'login'])->name('login-admin');
-    Route::get('/admin/dashboard', [DashboardController::class,'show'])->name('admin-dashboard');
+    Route::post('/admin/login/auth', [AuthController::class, 'login'])->name('login-admin');
 });
 

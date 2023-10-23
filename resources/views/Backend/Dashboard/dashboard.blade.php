@@ -2,5 +2,5 @@
 @section('title', $title)
 
 <div class="bg-red-500">
-    test
+    test cdhjfdas
 </div>

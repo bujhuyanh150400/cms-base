@@ -16,7 +16,7 @@ class AuthAdmin
                 return redirect()->route('admin-dashboard');
             }
         } else {
-            if ($request->route()->getName() !== 'show-login-admin') {
+            if ($request->route()->getName() !== 'show-login-admin' && $request->method() !== 'POST') {
                 return redirect()->route('show-login-admin');
             }
         }

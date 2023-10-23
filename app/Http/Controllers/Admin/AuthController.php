@@ -31,7 +31,7 @@ class AuthController extends Controller
             'password'=> $request->input('password')
         ],$rememberMe)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->route('admin-dashboard');
         }
         return redirect()->back()->withErrors([
             'login' => 'Email hoặc password của bạn không đúng',
