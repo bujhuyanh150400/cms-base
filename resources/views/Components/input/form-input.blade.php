@@ -3,6 +3,7 @@
            placeholder="{{ $label }}"
            name="{{ $name }}"
            id="{{ $id }}"
+           value="{{isset($value) ? $value : ""}}"
            @if($required == 'true') required @endif
            class="@if(!empty(trim($icon))) pl-10 @else pl-4 @endif pr-4 py-2 text-gray-400 w-full border-0 border-b border-gray-300 outline-none focus:bg-sky-50  focus:border-blue-300 focus:shadow-md transition-all duration-300"
     >

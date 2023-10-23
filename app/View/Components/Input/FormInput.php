@@ -18,6 +18,7 @@ class FormInput extends Component
         public string $name,
         public string $icon,
         public string $required,
+        public string $value,
     )
     {
     }
