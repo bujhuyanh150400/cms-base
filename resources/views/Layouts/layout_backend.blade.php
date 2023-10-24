@@ -6,11 +6,16 @@
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body class="p-0 m-0 bg-stone-100">
+    <x-container.navbar-admin/>
+    <x-container.header-admin>
+        <x-slot:title>
+            @yield('title-header')
+        </x-slot >
+    </x-container.header-admin>
+    <main class="mt-20 ml-[20%] h-screen bg-red-100">
 
-
-    <main>
-        @yield('content')
+        @yield('main')
     </main>
 </body>
 </html>
