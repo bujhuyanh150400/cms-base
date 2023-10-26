@@ -4,6 +4,7 @@ namespace App\View\Components\Container;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class HeaderAdmin extends Component
@@ -21,6 +22,10 @@ class HeaderAdmin extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.container.header-admin');
+        unset(Auth::user()->password);
+        return view('components.container.header-admin',[
+            'user_name'=> Auth::user()->name,
+
+        ]);
     }
 }

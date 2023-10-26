@@ -13,8 +13,7 @@
             @yield('title-header')
         </x-slot >
     </x-container.header-admin>
-    <main class="mt-20 ml-[20%] h-screen bg-red-100">
-
+    <main class="mt-20 ml-[20%]">
         @yield('main')
     </main>
 </body>

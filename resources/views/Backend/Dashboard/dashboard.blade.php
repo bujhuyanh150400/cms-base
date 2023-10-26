@@ -2,10 +2,8 @@
 @section('title', $title)
 @section('title-header', 'Dashboard')
 
-
-
 @section('main')
-<div class="bg-red-500">
+<div class="bg-red-50">
     test 1234
 
 </div>

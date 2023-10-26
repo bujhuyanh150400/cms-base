@@ -37,4 +37,9 @@ class AuthController extends Controller
             'login' => 'Email hoặc password của bạn không đúng',
         ])->withInput();
     }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('show-login-admin');
+    }
 }
