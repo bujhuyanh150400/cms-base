@@ -1,4 +1,4 @@
-<header class="fixed top-0 left-[20%] w-4/5 h-20 p-2 flex justify-center items-center">
+<header class="fixed top-0 left-[16.66667%] w-5/6 h-20 p-2 flex justify-center items-center">
     <div class="w-full h-full flex justify-between items-center bg-stone-100 bg-opacity-80 rounded-lg drop-shadow-xl backdrop-blur backdrop-saturate-200 px-4 py-2 border border-white">
         <div class="font-bold text-indigo-950">
             {{ $title }}

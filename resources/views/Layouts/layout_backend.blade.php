@@ -13,7 +13,7 @@
             @yield('title-header')
         </x-slot >
     </x-container.header-admin>
-    <main class="mt-20 ml-[20%]">
+    <main class="mt-20 ml-[16.6667%]">
         @yield('main')
     </main>
 </body>

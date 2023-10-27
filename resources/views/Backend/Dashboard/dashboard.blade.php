@@ -4,7 +4,6 @@
 
 @section('main')
 <div class="bg-red-50">
-    test 1234
-
+    Đây là dashboard
 </div>
 @endsection

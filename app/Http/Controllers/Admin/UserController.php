@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    
+    public function __construct()
+    {
+
+    }
+    public function list(){
+
+    }
     public function showRegister(){
         return view('admin.user.register');
     }
@@ -30,4 +36,5 @@ class UserController extends Controller
         UsersModel::create($data);
         return view('welcome');
     }
+
 }

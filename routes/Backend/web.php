@@ -12,7 +12,11 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('/admin', [DashboardController::class,'show'])->name('admin-dashboard');
     Route::get('/admin/login', [AuthController::class, 'show'])->name('show-login-admin');
     Route::post('/admin/login/auth', [AuthController::class, 'login'])->name('login-admin');
-
     Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout-admin');
+    Route::get('/admin/login', [AuthController::class, 'show'])->name('show-login-admin');
+
+
+    Route::get('/admin/login', [AuthController::class, 'show'])->name('show-login-admin');
+
 });
 
