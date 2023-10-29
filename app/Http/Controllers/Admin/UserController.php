@@ -10,14 +10,19 @@ class UserController extends Controller
 {
     public function __construct()
     {
-
     }
     public function list(){
-
+        return view('Backend.Users.list',[
+            'title'=> 'Admin - list user',
+            'titleHeader' => 'Danh sách nhân viên'
+        ]);
     }
-    public function showRegister(){
-        return view('admin.user.register');
-    }
+//    public function showRegister(){
+//        return view('admin.user.register',[
+//            'title'=> 'Admin - list user',
+//            'title-header' => 'User/header'
+//        ]);
+//    }
 
     // Test registration
     public function register(Request $request){

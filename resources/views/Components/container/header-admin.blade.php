@@ -1,18 +1,32 @@
-<header class="fixed top-0 left-[16.66667%] w-5/6 h-20 p-2 flex justify-center items-center">
-    <div class="w-full h-full flex justify-between items-center bg-stone-100 bg-opacity-80 rounded-lg drop-shadow-xl backdrop-blur backdrop-saturate-200 px-4 py-2 border border-white">
-        <div class="font-bold text-indigo-950">
-            {{ $title }}
+<header class="relative w-full ">
+    <div class="flex justify-between items-center text-white">
+        <div class="font-bold flex items-center gap-2">
+            <button type="button" id="admin-btn_show-hide" class="text-2xl">
+                <i class="bi bi-list-nested"></i>
+            </button>
+            {{ $headerTitle }}
         </div>
-        <div class="flex items-center gap-2">
-            <button><i class="bi bi-bell"></i></button>
-            <div class="drop_down_container relative">
-                <button type="button"
-                        data-dropdown="#userHeaderDropdown"
-                        class="drop_drown_btn text-stone-600 bg-gray-300 backdrop-blur bg-opacity-60 p-1.5 transition duration-200 hover:bg-gray-400  font-medium rounded-lg text-sm text-center inline-flex items-center justify-center gap-1">
+        <div class="flex items-center gap-3">
+            {{-- searching --}}
+            <x-input.input icon='<i class="bi bi-search"></i>' type="text" name="search-header" id="search-header" placeholder="{{__('lang_admin.header-admin.search')}}"  />
+            {{-- notification --}}
+            <x-dropdown class-btn="text-sm font-bold" id-dropdown="header-notification">
+                <x-slot name="btn_dropdown">
+                    <i class="bi bi-bell-fill"></i>
+                </x-slot>
+                <x-slot name="content_dropdown">
+                    <div class="min-w-[100px] text-gray-800 text-sm text-center">
+                        Chưa làm
+                    </div>
+                </x-slot>
+            </x-dropdown>
+            {{-- user  --}}
+            <x-dropdown class-btn="inline-flex items-center gap-2 text-sm font-bold"  id-dropdown="header-user">
+                <x-slot name="btn_dropdown">
                     <i class="bi bi-person-circle"></i>
-                    Xin chào, {{$user_name}}
-                </button>
-                <div id="userHeaderDropdown" class="drop_down_list absolute bg-gray-100 bg-opacity-80 hidden top-[120%] right-0 z-20 block bg-gray-100 rounded-lg shadow w-full">
+                    {{ __('lang_admin.header-admin.hello') }} {{$user_name}}
+                </x-slot>
+                <x-slot name="content_dropdown">
                     <ul class="py-2 text-sm text-gray-800">
                         <li>
                             <a href="#" class="block px-4 py-2 transition duration-200 hover:bg-gray-400 hover:text-white">My Account</a>
@@ -29,24 +43,12 @@
                             </form>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </x-slot>
+            </x-dropdown>
         </div>
     </div>
 </header>
-<script type="module">
-    $(document).on('click', function(e) {
-        let target = $(e.target);
-        if (!target.closest('.drop_down_container').length) {
-            $('.drop_down_list').slideUp(100);
-        }
-    });
-    $('.drop_drown_btn').on('click', function() {
-        let dropdown = $($(this).data('dropdown'));
-        $('.drop_down_list').not(dropdown).hide();
-        dropdown.slideToggle(100);
-    });
-    $('.drop_down_list').on('click',function (){
-        $(this).slideUp(100);
-    })
-</script>
+
+
+
+

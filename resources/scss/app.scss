@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes slideRightToLeft {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+@keyframes slideLeftToRight {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+// custom tailwinds
+.trans-200{
+    @apply transition-all duration-200 ease-out
+}
+.trans-300{
+    @apply transition-all duration-300 ease-out
+}
+.trans-500{
+    @apply transition-all duration-500 ease-out
+}
+// section-main-admin
+.section-main-admin{
+    margin-left: 20%;
+    padding: 1rem;
+}
+.section-main-admin-hidden-navbar{
+    margin: 0;
+}
+// Menu - admin - navbar
+.navbar-admin{
+    @apply fixed top-0 left-0 w-1/5 h-screen bg-transparent p-3;
+    animation: slideRightToLeft 0.3s;
+}
+.hidden-navbar-admin{
+    animation: slideLeftToRight 0.3s;
+    transform: translateX(-100%);
+}
+.active-menu{
+    @apply bg-gray-200 text-gray-700 font-medium
+}
+.nav-menu-admin{
+    @apply p-3 rounded-lg inline-flex items-center text-sm gap-2 w-full transition duration-200 ease-out hover:bg-gray-200 hover:font-medium
+}
+.menu-list{
+    .menu-list-btn{
+        @apply p-3 rounded-lg inline-flex items-center justify-between text-sm gap-2 w-full transition duration-200 ease-out hover:bg-gray-200 hover:font-medium
+    }
+    .sub-menu-list{
+        @apply flex flex-col hidden;
+        .sub-menu-list-item{
+            @apply w-full block p-2 rounded-lg pl-10 text-gray-400 text-sm transition duration-200 ease-out hover:text-gray-700 hover:font-medium
+        }
+        .active-menu-sub{
+            @apply  text-gray-700 font-medium
+        }
+    }
+
+}
+

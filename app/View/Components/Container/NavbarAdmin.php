@@ -22,14 +22,15 @@ class NavbarAdmin extends Component
             ],
             [
                 'title' => trans('lang_admin.navbar.users.title'),
-                'icon' => '<i class="bi bi-people"></i>',
+                'icon' => '<i class="bi bi-people text-blue-500 text-xl"></i>',
                 'menu_items'=>[
                     [
                         'title'=>trans('lang_admin.navbar.users.menu-items.list-users'),
-                        'action' => route('admin-dashboard')
+                        'action' => route('users/list')
                     ],
                 ]
             ],
+
         ];
     }
 
@@ -37,7 +38,7 @@ class NavbarAdmin extends Component
     {
         return view('components.container.navbar-admin', [
             'list_menu'=> $this->arrayNavMenu,
-            'current-route'=>request()->url(),
+            'current_route'=>request()->url(),
         ]);
     }
 }

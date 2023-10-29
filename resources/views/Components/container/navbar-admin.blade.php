@@ -1,23 +1,49 @@
-<div class="fixed top-0 left-0 w-1/6 h-screen bg-transparent p-6">
-    <div class="flex flex-col gap-2 h-full bg-gradient-to-b from-stone-400 to-gray-500 text-white rounded-2xl shadow-2xl backdrop-blur backdrop-saturate-200 border border-white overflow-y-auto">
-        <div class="flex items-center justify-center border-b py-4 px-2">
-            <h1 class="font-bold text-xl"><i class="bi bi-archive"></i> LOGO nào đó</h1>
+<div class="navbar-admin">
+    <div class="flex flex-col gap-2 h-full bg-white text-gray-600 rounded-2xl shadow-2xl overflow-y-auto px-4 py-2">
+        <div class="flex items-center justify-center gap-2 py-3">
+            <i class="bi bi-dribbble text-2xl"></i><span class="text-sm font-medium">{{__('lang_admin.logo-admin')}}</span>
         </div>
-        <div class="py-2 px-5 flex flex-col gap-2">
+        <hr>
+        <div class="flex flex-col gap-2">
             @foreach ($list_menu as $item_menu)
                 @if(empty($item_menu['menu_items']))
                     <a href="{{$item_menu['action']}}"
-                       class="bg-stone-600 p-3 rounded-lg text-"
-                    >{!! $item_menu['icon'] !!}
+                       class="nav-menu-admin @if($current_route == $item_menu['action']) active-menu @endif"
+                    >
+                        <span class="text-xl text-orange-500">{!! $item_menu['icon'] !!}</span>
                         {{ $item_menu['title'] }}
                     </a>
                 @else
-                    <p>This is user {{ $item_menu['title'] }}</p>
-                    @foreach($item_menu['menu_items'] as $item_menu_sub)
-                        {{$item_menu_sub['title']}}
-                    @endforeach
+                    <div class="menu-list">
+                        <button
+                            type="button"
+                            class="menu-list-btn justify-between"
+                        >
+                            <div class="inline-flex gap-2 items-center">
+                                <span class="text-xl text-orange-500">{!! $item_menu['icon'] !!}</span>
+                                {{ $item_menu['title'] }}
+                            </div>
+                            <span class="" data-arrow="{{$item_menu['title']}}">
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </span>
+                        </button>
+                        <ul class="sub-menu-list">
+                            @foreach($item_menu['menu_items'] as $item_menu_sub)
+                                <li class="w-full my-2">
+                                    <a href="{{$item_menu_sub['action']}}"
+                                       class="sub-menu-list-item @if($item_menu_sub['action'] == $current_route) active-menu-sub @endif"
+                                    >
+                                        {{$item_menu_sub['title']}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
             @endforeach
         </div>
     </div>
 </div>
+<script type="module">
+
+</script>
