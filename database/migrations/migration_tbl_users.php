@@ -22,7 +22,8 @@ return new class extends Migration
             $table->integer('department')->default(0);
             $table->integer('position')->default(0);
             $table->integer('access_login')->default(0);
-            $table->text('phone');
+            $table->string('phone');
+            $table->text('address');
             $table->timestamp('created_at')->default(now());
             $table->timestamp('updated_at');
             $table->rememberToken();

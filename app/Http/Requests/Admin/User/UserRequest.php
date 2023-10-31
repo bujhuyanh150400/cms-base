@@ -15,12 +15,12 @@ class UserRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
+            'name' => 'required',
             'password' => 'required|min:8|max:36',
             'conf_pass' => 'required|min:8|max:36|same:password',
             'address' => 'required|max:255',
-            'phone' => 'required|number',
-            'birth' => 'required|date|date_format: m-d-Y',
-            'access_login' => 'required',
+            'phone' => 'required|numeric',
+            'birth' => 'required|date',
             'department' => 'required',
             'position' => 'required',
             'access_login' => 'required|in:0,1',
@@ -29,11 +29,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'Vui lòng nhập địa chỉ email.',
-            'email.email' => 'Địa chỉ email không hợp lệ.',
-            'password.required' => 'Vui lòng nhập mật khẩu.',
-            'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
-            'password.max' => 'Mật khẩu tối đa là :max ký tự.',
+
         ];
     }
 }

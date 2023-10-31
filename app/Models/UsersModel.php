@@ -34,6 +34,7 @@ class UsersModel extends Authenticatable
         'position' ,
         'access_login',
         'phone',
+        'address',
         'created_at',
         'updated_at',
         'remember_token',

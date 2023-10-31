@@ -10,7 +10,7 @@
             <select id="page" class="border-4">
                 <option selected>Choose a country</option>
             </select>
-            <a href="{{route('users/add-user')}}">Thêm user</a>
+            <a href="{{route('users/form-register-user')}}">Thêm user</a>
         </div>
         <x-table></x-table>
     </div>

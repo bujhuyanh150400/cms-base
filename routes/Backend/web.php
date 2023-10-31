@@ -19,6 +19,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('/admin/users/list', [UserController::class, 'list'])->name('users/list');
 
 
-    Route::match(['POST','GET'],'/admin/users/add-user', [UserController::class, 'addUser'])->name('users/add-user');
+    Route::get('/admin/users/form-register-user', [UserController::class, 'formRegisterUser'])->name('users/form-register-user');
+    Route::post('/admin/users/register-user', [UserController::class, 'registerUser'])->name('users/register-user');
 });
 
