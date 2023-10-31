@@ -15,6 +15,11 @@ return [
                 'list-users'=>'Danh sách nhân sự',
             ]
         ]
+    ],
+    'users'=>[
+        'add-user'=>[
+            'title'=>'Thêm nhân viên'
+        ]
     ]
 ];
 

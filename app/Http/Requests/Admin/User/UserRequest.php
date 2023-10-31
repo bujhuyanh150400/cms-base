@@ -1,24 +1,31 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\User;
 
-use App\Models\UsersModel;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
             'email' => 'required|email',
             'password' => 'required|min:8|max:36',
+            'conf_pass' => 'required|min:8|max:36|same:password',
+            'address' => 'required|max:255',
+            'phone' => 'required|number',
+            'birth' => 'required|date|date_format: m-d-Y',
+            'access_login' => 'required',
+            'department' => 'required',
+            'position' => 'required',
+            'access_login' => 'required|in:0,1',
         ];
     }
-
     public function messages()
     {
         return [

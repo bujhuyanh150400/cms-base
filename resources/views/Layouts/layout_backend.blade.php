@@ -32,9 +32,9 @@
         $('.drop_down_list').not(dropdown).hide();
         dropdown.slideToggle(100);
     });
-    $('.drop_down_list').on('click',function (){
-        $(this).slideUp(100);
-    })
+    // $('.drop_down_list').on('click',function (){
+    //     $(this).slideUp(100);
+    // })
     $('.menu-list-btn').on('click',function (){
         const menuList = $(this).parent();
         menuList.find('.sub-menu-list').slideToggle(100);
@@ -58,6 +58,72 @@
             $('.section-main-admin').addClass('section-main-admin-hidden-navbar')
 
         }
+    });
+    const app = {
+        select2Custom: (element) => {
+            element.each(function (index,item){
+                const select = $(item);
+                select.hide();
+                select.wrap('<div class="select-custom-container"></div>');
+                select.before('<button type="button" class="select-custom-button"></button>');
+                select.after('<div class="select-custom-dropdown"></div>');
+                const dropdown = select.next('.select-custom-dropdown');
+                const option = select.find('option');
 
+                dropdown.append('<input type="text" class="select-custom-search" placeholder="Search...">');
+                dropdown.append('<ul class="select-custom-results"></ul>');
+                const searchInput = dropdown.find('.select-custom-search');
+                const resultsList = dropdown.find('.select-custom-results');
+                const buttonSelect = select.parent('.select-custom-container').find('.select-custom-button');
+
+                buttonSelect.on('click',function (){
+                    dropdown.slideToggle(100);
+                    $('.select-custom-dropdown').not(select.parent('.select-custom-container').find('.select-custom-dropdown')).hide();
+                });
+
+                // console.log(buttonSelect)
+                option.each(function() {
+                    const value = $(this).val();
+                    const text = $(this).text();
+                    if($(this).prop('selected')){
+                        buttonSelect.text(text);
+                    }else{
+                        buttonSelect.text(option.first().text());
+                    }
+                    resultsList.append(`<li data-value="${value}">${text}</li>`);
+                });
+
+                searchInput.on('input', function() {
+                    let searchTerm = $(this).val().toLowerCase();
+                    resultsList.find('li').each(function() {
+                        let text = $(this).text().toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                });
+                resultsList.on('click', 'li', function() {
+                    let value = $(this).data('value');
+                    let text = $(this).text();
+                    buttonSelect.text(text);
+                    select.val(value);
+                    select.trigger('change');
+                    dropdown.slideUp(100);
+                    searchInput.val('');
+                    resultsList.find('li').show();
+                });
+                $(document).on('click', function(e) {
+                    let target = $(e.target);
+                    if (!target.closest('.select-custom-container').length) {
+                        $('.select-custom-dropdown').slideUp(100);
+                    }
+                });
+            })
+        }
+    }
+    $(document).ready(function() {
+        app.select2Custom($('.customSelect'));
     });
 </script>

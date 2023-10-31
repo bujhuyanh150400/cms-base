@@ -6,17 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Button extends Component
+class Select extends Component
 {
-    public $type;
-    public $color;
-    public function __construct(
-        $type,
-        $color
-    )
+    public $id;
+    public $name;
+    public function __construct($id,$name)
     {
-        $this->type = $type;
-        $this->color = $color;
+        $this->name = $name;
+        $this->id =$id;
     }
 
     /**
@@ -24,6 +21,6 @@ class Button extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.input.button');
+        return view('components.input.select');
     }
 }
