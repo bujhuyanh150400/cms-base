@@ -17,26 +17,41 @@ class UserController extends Controller
     public function __construct()
     {
     }
-    public function list(){
+
+    public function list()
+    {
         $test = UsersModel::count();
         $perPage = self::PAGE_LIST; // Số lượng bản ghi trên mỗi trang
         $page = request()->query('page', 1); // Trang hiện tại, mặc định là 1
         $users = UsersModel::paginate($perPage, ['*'], 'page', $page);
-        return view('Backend.Users.list',[
-            'title'=> 'Admin - list user',
+        return view('Backend.Users.list', [
+            'title' => 'Admin - list user',
             'titleHeader' => 'Danh sách nhân viên'
         ]);
     }
 
-    public function formRegisterUser(){
-        return view('Backend.Users.add-user',[
-            'title'=> 'Admin - add user',
+    public function formRegisterUser()
+    {
+        return view('Backend.Users.add-user', [
+            'title' => 'Admin - add user',
             'titleHeader' => 'Thêm nhân viên'
         ]);
     }
 
-    public function registerUser(UserRequest $request){
-        dd($request->all());
+    public function registerUser(UserRequest $request)
+    {
+        $data = [
+            'email' => $request->input('email'),
+            'name' => $request->input('name'),
+            'password' => bcrypt($request->input('password')),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'birth' => $request->input('birth'),
+            'position' => $request->input('position'),
+            'department' => $request->input('department'),
+            'access_login' => $request->input('access_login'),
+        ];
+        UsersModel::create($data);
         return redirect()->back()->withInput();
     }
 

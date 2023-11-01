@@ -34,8 +34,8 @@
                     <label class="font-medium text-sm @error('position') text-red-500 @enderror" for="position">Vị trí</label>
                     <x-input.select id="position" name="position">
                         <x-slot name="option">
-                            <option>Lựa chọn</option>
-                            @foreach(UserConstant::getListPosition() as $position)
+                            <option value="">Lựa chọn</option>
+                        @foreach(UserConstant::getListPosition() as $position)
                                 <option value="{{$position['value']}}" @if(old('position') == $position['value']) selected @endif>{{$position['text']}}</option>
                             @endforeach
                         </x-slot>
@@ -48,7 +48,7 @@
                     <label class="font-medium text-sm @error('department') text-red-500 @enderror" for="department">Phòng ban</label>
                     <x-input.select id="department" name="department">
                         <x-slot name="option">
-                            <option>Lựa chọn</option>
+                            <option value="">Lựa chọn</option>
                             @foreach(UserConstant::getListDepartment() as $deparment)
                                 <option value="{{$deparment['value']}}" @if(old('deparment') == $deparment['value']) selected @endif>{{$deparment['text']}}</option>
                             @endforeach
@@ -72,14 +72,13 @@
                 </div>
             </div>
             <div class="flex items-center justify-end gap-2 col-span-full">
-                <x-input.button type="button" color="non-color">
+                <button type="button" class="btn-non-color" onclick="window.location.href = '{{route('users/list')}}'">
                     Huỷ
-                </x-input.button>
-                <x-input.button type="submit" color="color">
+                </button>
+                <button type="submit" class="btn-color">
                     Lưu người dùng
-                </x-input.button>
+                </button>
             </div>
-
         </form>
     </div>
 @endsection

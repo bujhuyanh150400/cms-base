@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => ['required','email',Rule::unique('tbl_users')],
             'name' => 'required',
             'password' => 'required|min:8|max:36',
             'conf_pass' => 'required|min:8|max:36|same:password',

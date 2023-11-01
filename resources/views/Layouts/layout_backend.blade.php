@@ -8,6 +8,10 @@
 </head>
 <body class="p-0 m-0 bg-stone-200">
     <div class="absolute min-h-[300px] bg-orange-500 w-full top-0 left-0 z-[-1]"></div>
+
+    <div id="toast-section">
+    </div>
+
     <x-container.navbar-admin/>
     <main class="section-main-admin">
         <x-container.header-admin>
@@ -32,9 +36,6 @@
         $('.drop_down_list').not(dropdown).hide();
         dropdown.slideToggle(100);
     });
-    // $('.drop_down_list').on('click',function (){
-    //     $(this).slideUp(100);
-    // })
     $('.menu-list-btn').on('click',function (){
         const menuList = $(this).parent();
         menuList.find('.sub-menu-list').slideToggle(100);
@@ -59,6 +60,8 @@
 
         }
     });
+
+
     const app = {
         select2Custom: (element) => {
             element.each(function (index,item){
@@ -69,19 +72,15 @@
                 select.after('<div class="select-custom-dropdown"></div>');
                 const dropdown = select.next('.select-custom-dropdown');
                 const option = select.find('option');
-
                 dropdown.append('<input type="text" class="select-custom-search" placeholder="Search...">');
                 dropdown.append('<ul class="select-custom-results"></ul>');
                 const searchInput = dropdown.find('.select-custom-search');
                 const resultsList = dropdown.find('.select-custom-results');
                 const buttonSelect = select.parent('.select-custom-container').find('.select-custom-button');
-
                 buttonSelect.on('click',function (){
                     dropdown.slideToggle(100);
                     $('.select-custom-dropdown').not(select.parent('.select-custom-container').find('.select-custom-dropdown')).hide();
                 });
-
-                // console.log(buttonSelect)
                 option.each(function() {
                     const value = $(this).val();
                     const text = $(this).text();
@@ -92,7 +91,6 @@
                     }
                     resultsList.append(`<li data-value="${value}">${text}</li>`);
                 });
-
                 searchInput.on('input', function() {
                     let searchTerm = $(this).val().toLowerCase();
                     resultsList.find('li').each(function() {
@@ -121,6 +119,54 @@
                     }
                 });
             })
+        },
+
+
+        showToast: (message,type = 'success',timeout = 5000) =>{
+            let icon;
+            switch (type){
+                case 'error':
+                    icon = '<i class="bi bi-exclamation-lg"></i>';
+                    break;
+                case 'warning':
+                    break;
+                    icon = '<i class="bi bi-cone"></i>';
+                case 'success':
+                    icon = '<i class="bi bi-check"></i>';
+                    break;
+                default:
+                    type = 'warning';
+                    icon = '<i class="bi bi-cone"></i>';
+                    break;
+            }
+            const container = $('#toast-section');
+            let html =`
+                <div class="toast-container" role="${type}">
+                    <div class="icon-holder">
+                           ${icon}
+                    </div>
+                    <div class="content">${message}</div>
+                    <button type="button" class="btn-close">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            `;
+            container.append(html);
+            $('.toast-container').each(function (index,item){
+                $(item).on('click',function (){
+                    $(this).hide(100);
+                    setTimeout(()=>{
+                        $(this).remove()
+                    },100)
+                })
+                setTimeout(()=>{
+                    $(this).fadeOut(3000);
+                    setTimeout(()=>{
+                        $(this).remove()
+                    },3000)
+                },timeout)
+            })
+
         }
     }
     $(document).ready(function() {

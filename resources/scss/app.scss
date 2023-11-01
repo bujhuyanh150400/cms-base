@@ -18,6 +18,14 @@
         transform: translateX(-100%);
     }
 }
+@keyframes toastAnimate {
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
 // custom tailwinds
 .trans-200{
     @apply transition-all duration-200 ease-out
@@ -102,6 +110,46 @@
             }
         }
     }
-
 }
 
+// button
+.btn-color{
+    @apply bg-gradient-to-t from-orange-600 to-orange-300 font-bold text-sm rounded-lg shadow-lg px-4 py-2 duration-200 text-white hover:-translate-y-1;
+}
+.btn-non-color{
+    @apply bg-stone-400 font-bold text-sm rounded-lg shadow-lg px-4 py-2 duration-200 text-white hover:-translate-y-1;
+}
+
+// toast
+#toast-section{
+    @apply fixed w-full max-w-xs bg-transparent h-auto right-2 bottom-5 z-50 flex flex-col gap-2;
+    .toast-container {
+        animation: toastAnimate 0.3s;
+        &[role="success"] {
+            @apply relative flex items-center justify-between w-full p-4 text-gray-500 bg-green-100 rounded-lg shadow-xl transition duration-200 hover:-translate-y-1 cursor-pointer;
+            .icon-holder{
+                @apply inline-flex items-center justify-center w-8 h-8 text-green-600 text-3xl;
+            }
+        }
+
+        &[role="error"] {
+           @apply relative flex items-center w-full p-4 text-gray-500 bg-red-100 rounded-lg shadow-xl transition duration-200 hover:-translate-y-1 cursor-pointer;
+            .icon-holder{
+                @apply inline-flex items-center justify-center w-8 h-8 text-red-600 text-3xl;
+            }
+        }
+
+        &[role="warning"] {
+            @apply relative flex items-center w-full p-4 text-gray-500 bg-yellow-100 rounded-lg shadow-xl transition duration-200 hover:-translate-y-1 cursor-pointer;
+            .icon-holder{
+                @apply inline-flex items-center justify-center w-8 h-8 text-yellow-600 text-3xl;
+            }
+        }
+        .content{
+            @apply ml-3 text-sm font-normal max-w-full break-all;
+        }
+        .btn-close{
+            @apply ml-auto text-gray-500 -mx-1.5 -my-1.5 trans-200 hover:scale-150;
+        }
+    }
+}
