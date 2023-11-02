@@ -28,6 +28,10 @@ class NavbarAdmin extends Component
                         'title'=>trans('lang_admin.navbar.users.menu-items.list-users'),
                         'action' => route('users/list')
                     ],
+                    [
+                        'title'=>'Quản lí Role',
+                        'action' => route('users/list-role')
+                    ],
                 ]
             ],
 

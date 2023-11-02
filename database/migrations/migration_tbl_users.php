@@ -19,13 +19,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->text('password');
             $table->timestamp('birth');
-            $table->integer('department')->default(0);
-            $table->integer('position')->default(0);
+            $table->smallInteger('gender')->default(1);
+            $table->integer('role')->default(1);
             $table->integer('access_login')->default(0);
             $table->string('phone');
             $table->text('address');
             $table->timestamp('created_at')->default(now());
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->default(null);
+            $table->bigInteger('updated_by')->default(null);
             $table->rememberToken();
         });
     }

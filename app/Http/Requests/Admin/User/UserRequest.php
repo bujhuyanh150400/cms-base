@@ -22,8 +22,8 @@ class UserRequest extends FormRequest
             'address' => 'required|max:255',
             'phone' => 'required|numeric',
             'birth' => 'required|date',
-            'department' => 'required',
-            'position' => 'required',
+            'gender' => 'required|in:1,2',
+            'role' => 'required',
             'access_login' => 'required|in:0,1',
         ];
     }

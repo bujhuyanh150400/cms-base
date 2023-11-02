@@ -8,26 +8,32 @@ use App\Http\Requests\AuthRequest;
 use App\Models\UsersModel;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class UserController extends Controller
 {
 
-    private const PAGE_LIST = 10;
+    private const PER_PAGE = 10;
 
     public function __construct()
     {
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $test = UsersModel::count();
-        $perPage = self::PAGE_LIST; // Số lượng bản ghi trên mỗi trang
-        $page = request()->query('page', 1); // Trang hiện tại, mặc định là 1
+
+        $perPage = $request->input('perPage',self::PER_PAGE);
+        $page = request()->query('page', 1);
+
         $users = UsersModel::paginate($perPage, ['*'], 'page', $page);
+
         return view('Backend.Users.list', [
             'title' => 'Admin - list user',
-            'titleHeader' => 'Danh sách nhân viên'
+            'titleHeader' => 'Danh sách nhân viên',
+            'users'=>$users
         ]);
+
     }
 
     public function formRegisterUser()
@@ -41,35 +47,35 @@ class UserController extends Controller
     public function registerUser(UserRequest $request)
     {
         $data = [
+            'id'=> $this->getIdAsTimestamp(),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
             'birth' => $request->input('birth'),
-            'position' => $request->input('position'),
-            'department' => $request->input('department'),
+            'role' => $request->input('role'),
+            'gender' => $request->input('gender'),
             'access_login' => $request->input('access_login'),
         ];
-        UsersModel::create($data);
-        return redirect()->back()->withInput();
+        $user = UsersModel::create($data);
+        if ($user) {
+            session()->flash('success', 'Lưu trữ dữ liệu thành công!');
+            return redirect()->route('users/list');
+        } else {
+            session()->flash('error', 'Có lỗi gì đó khi inset database');
+            return redirect()->back()->withInput();
+        }
     }
 
-    // Test registration
-//    public function register(){
-//        $data = $request->validate([
-//            'user_name' => 'required',
-//            'user_email' => 'required',
-//            'user_password' => 'required',
-//            'user_birth' => 'required',
-//            'user_department' => 'required',
-//            'user_position' => 'required',
-//            'user_phone' => 'required',
-//        ]);
-//        $data['user_id'] = $this->getIdAsTimestamp();
-//        $data['user_password'] = bcrypt($data['user_password']);
-//        UsersModel::create($data);
-//        return view('welcome');
-//    }
+    public function listRole(Request $request){
+        return view('Backend.Users.list-role',[
+            'title' => 'Admin - list roles',
+            'titleHeader' => 'Danh sách Role',
+        ]);
+    }
+    public function formRegistRole(Request $request){
+
+    }
 
 }

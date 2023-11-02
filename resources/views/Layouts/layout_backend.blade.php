@@ -172,4 +172,14 @@
     $(document).ready(function() {
         app.select2Custom($('.customSelect'));
     });
+    @if(session('success'))
+        app.showToast('{{ session('success') }}','success');
+    @endif
+    @if(session('error'))
+        app.showToast('{{ session('error') }}','error');
+    @endif
+</script>
+
+<script type="module">
+
 </script>

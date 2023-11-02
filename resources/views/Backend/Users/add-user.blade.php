@@ -31,30 +31,27 @@
                 </div>
                 <x-input.form-group type="date" id="birth" label="Ngày sinh" name="birth" placeholder="Nhập ngày sinh" icon='<i class="bi bi-calendar"></i>'/>
                 <div class="flex flex-col gap-2">
-                    <label class="font-medium text-sm @error('position') text-red-500 @enderror" for="position">Vị trí</label>
-                    <x-input.select id="position" name="position">
+                    <label class="font-medium text-sm @error('role') text-red-500 @enderror" for="position">Vị trí</label>
+                    <x-input.select id="role" name="role">
                         <x-slot name="option">
                             <option value="">Lựa chọn</option>
-                        @foreach(UserConstant::getListPosition() as $position)
-                                <option value="{{$position['value']}}" @if(old('position') == $position['value']) selected @endif>{{$position['text']}}</option>
-                            @endforeach
+                            <option value="1">Admin</option>
                         </x-slot>
                     </x-input.select>
-                    @error('position')
+                    @error('role')
                         <span class="text-xs font-medium text-red-500 inline-flex items-center gap-2"><i class="bi bi-exclamation-circle"></i>{{$message}}</span>
                     @enderror
                 </div>
                 <div class="flex flex-col gap-2">
-                    <label class="font-medium text-sm @error('department') text-red-500 @enderror" for="department">Phòng ban</label>
-                    <x-input.select id="department" name="department">
+                    <label class="font-medium text-sm @error('gender') text-red-500 @enderror" for="department">Giới tính</label>
+                    <x-input.select id="gender" name="gender">
                         <x-slot name="option">
                             <option value="">Lựa chọn</option>
-                            @foreach(UserConstant::getListDepartment() as $deparment)
-                                <option value="{{$deparment['value']}}" @if(old('deparment') == $deparment['value']) selected @endif>{{$deparment['text']}}</option>
-                            @endforeach
+                            <option value="1" @if(old('gender') == 1) selected @endif>Nam</option>
+                            <option value="2" @if(old('gender') == 2) selected @endif>Nữ</option>
                         </x-slot>
                     </x-input.select>
-                    @error('department')
+                    @error('gender')
                         <span class="text-xs font-medium text-red-500 inline-flex items-center gap-2"><i class="bi bi-exclamation-circle"></i>{{$message}}</span>
                     @enderror
                 </div>
@@ -62,8 +59,8 @@
                     <label class="font-medium text-sm @error('access_login') text-red-500 @enderror" for="access_login">Cho phép đăng nhập</label>
                     <x-input.select id="access_login" name="access_login">
                         <x-slot name="option">
-                            <option value="0" @if(old('deparment') == 0) selected @endif>Không cho phép</option>
-                            <option value="1" @if(old('deparment') == 1) selected @endif>Cho phép</option>
+                            <option value="0" @if(old('access_login') == 0) selected @endif>Không cho phép</option>
+                            <option value="1" @if(old('access_login') == 1) selected @endif>Cho phép</option>
                         </x-slot>
                     </x-input.select>
                     @error('access_login')

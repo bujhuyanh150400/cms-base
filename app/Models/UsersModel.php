@@ -24,24 +24,25 @@ class UsersModel extends Authenticatable
             $this->setAttribute($key, $value);
         }
     }
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
     protected $fillable = [
         'id',
         'name',
         'email',
         'password',
         'birth' ,
-        'department' ,
-        'position' ,
+        'gender' ,
+        'address',
+        'role' ,
         'access_login',
         'phone',
         'address',
-        'created_at',
         'updated_at',
-        'remember_token',
     ];
-    protected $hidden = [
-        'password',
-    ];
+
     public function setUserPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
