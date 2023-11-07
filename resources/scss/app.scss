@@ -47,10 +47,8 @@
 // Menu - admin - navbar
 .navbar-admin{
     @apply fixed top-0 left-0 w-1/5 h-screen bg-transparent p-3;
-    animation: slideRightToLeft 0.3s;
 }
 .hidden-navbar-admin{
-    animation: slideLeftToRight 0.3s;
     transform: translateX(-100%);
 }
 .active-menu{

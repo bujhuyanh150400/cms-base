@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserRequest;
-use App\Http\Requests\AuthRequest;
+use App\Models\Admin\RoleModel;
 use App\Models\UsersModel;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -35,7 +33,6 @@ class UserController extends Controller
         ]);
 
     }
-
     public function formRegisterUser()
     {
         return view('Backend.Users.add-user', [
@@ -43,7 +40,6 @@ class UserController extends Controller
             'titleHeader' => 'Thêm nhân viên'
         ]);
     }
-
     public function registerUser(UserRequest $request)
     {
         $data = [
@@ -67,15 +63,43 @@ class UserController extends Controller
             return redirect()->back()->withInput();
         }
     }
-
     public function listRole(Request $request){
+        $perPage = $request->input('perPage',self::PER_PAGE);
+        $page = request()->query('page', 1);
+
+        $roleData = RoleModel::paginate($perPage, ['*'], 'page', $page);
+
         return view('Backend.Users.list-role',[
             'title' => 'Admin - list roles',
             'titleHeader' => 'Danh sách Role',
+            'roles'=>$roleData
         ]);
     }
     public function formRegistRole(Request $request){
+        return view('Backend.Users.add-role',[
+            'title' => 'Admin - add roles',
+            'titleHeader' => 'Thêm Role',
+        ]);
+    }
 
+    public function registRole (Request $request){
+        $request->validate([
+            'title' => 'required|min:4|max:50',
+            'description' => 'required|max:255',
+        ]);
+        $result = RoleModel::create([
+            'id_role'=> $this->getIdAsTimestamp(),
+            'title'=>$request->input('title'),
+            'description'=>$request->input('description'),
+            'updated_by' => Auth::user()->id
+        ]);
+        if ($result) {
+            session()->flash('success', 'Lưu trữ dữ liệu thành công!');
+            return redirect()->route('users/list-role');
+        } else {
+            session()->flash('error', 'Có lỗi gì đó khi inset database');
+            return redirect()->back()->withInput();
+        }
     }
 
 }

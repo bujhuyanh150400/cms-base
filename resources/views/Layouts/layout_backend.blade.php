@@ -8,10 +8,8 @@
 </head>
 <body class="p-0 m-0 bg-stone-200">
     <div class="absolute min-h-[300px] bg-orange-500 w-full top-0 left-0 z-[-1]"></div>
-
     <div id="toast-section">
     </div>
-
     <x-container.navbar-admin/>
     <main class="section-main-admin">
         <x-container.header-admin>
@@ -121,7 +119,6 @@
             })
         },
 
-
         showToast: (message,type = 'success',timeout = 5000) =>{
             let icon;
             switch (type){
@@ -178,8 +175,9 @@
     @if(session('error'))
         app.showToast('{{ session('error') }}','error');
     @endif
+    @if(session('warning'))
+        app.showToast('{{ session('warning') }}','warning');
+    @endif
 </script>
 
-<script type="module">
 
-</script>
