@@ -1,25 +1,10 @@
 <?php
 return [
-    'logo-admin'=>'CMS Admin panel (chưa có logo)',
-    'header-admin'=>[
-        'hello'=>'Xin chào,',
-        'search'=>'Tìm kiếm'
-    ],
-    'navbar'=> [
-        'dashboard' =>[
-            'title'=>'Trang chủ'
-        ],
-        'users'=>[
-            'title'=> 'Quản lý nhân sự',
-            'menu-items'=>[
-                'list-users'=>'Danh sách nhân sự',
-            ]
-        ]
-    ],
-    'users'=>[
-        'add-user'=>[
-            'title'=>'Thêm nhân viên'
-        ]
-    ]
+    'logo-admin' => 'Admin panel ',
+    'dashboard_title' => 'Trang chủ',
+    'internal' => 'Nội bộ',
+    'user-manager' => 'Quản lý nhân sự',
+    'list-user' => 'Nhân sự',
+    'list-role' => 'Chức vụ',
 ];
 

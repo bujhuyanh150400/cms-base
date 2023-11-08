@@ -26,8 +26,7 @@
                         <strong>{{ $message }}</strong>
                     </label>
                     @enderror
-                    <x-input.form-input id="email_login" type="text" label="Email" name="email" value="{{old('email')}}"
-                                        icon='<i class="bi bi-envelope"></i>' required="false"/>
+                    <input  id="email_login" type="text" name="email" value="{{old('email')}}"/>
                 </div>
                 <div class="block w-full">
                     @error('password')
@@ -35,8 +34,9 @@
                         <strong>{{ $message }}</strong>
                     </label>
                     @enderror
-                    <x-input.form-input id="password_login" type="password" label="Password" value="{{old('password')}}"
-                                        name="password" icon='<i class="bi bi-key"></i>' required="false"/>
+                    <input  id="password_login" type="password"  value="{{old('password')}}"
+                            name="password"/>
+
                 </div>
             </div>
             <label class="relative inline-flex items-center my-4 cursor-pointer">

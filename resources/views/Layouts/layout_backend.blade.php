@@ -8,9 +8,25 @@
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="p-0 m-0 bg-stone-200">
-    <main class="flex ">
-        {{--        <form action="{{ route('logout-admin') }}" method="POST"> --}}
+<body class="p-0 m-0 bg-stone-200 h-full">
+    <section class="flex w-full h-full">
+        <x-backend.section.navbar/>
+        <div class="w-full">
+            <x-backend.section.header>
+                <x-slot name="title">
+                    @yield('title-header')
+                </x-slot>
+            </x-backend.section.header>
+            @yield('main')
+        </div>
+    </section>
+</body>
+
+</html>
+
+
+
+  {{--        <form action="{{ route('logout-admin') }}" method="POST"> --}}
         {{--            @csrf --}}
         {{--            @method('POST') --}}
         {{--            <button type="submit" --}}
@@ -19,10 +35,3 @@
         {{--                <i class="bi bi-box-arrow-right"></i> Log out --}}
         {{--            </button> --}}
         {{--        </form> --}}
-        <div class="py-5">
-            @yield('main')
-        </div>
-    </main>
-</body>
-
-</html>
