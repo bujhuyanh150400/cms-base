@@ -32,13 +32,13 @@ class Navbar extends Component
                     [
                         'title'=>trans('lang_admin.list-user'),
                         'action' => route('users/list'),
-                        'route_name'=>'users/list'
+                        'route_name'=>'users'
                     ],
-                    [
-                        'title'=>trans('lang_admin.list-role'),
-                        'action' => route('users/list-role'),
-                        'route_name'=>'users/list-role'
-                    ],
+                    // [
+                    //     'title'=>trans('lang_admin.list-role'),
+                    //     'action' => route('users/list-role'),
+                    //     'route_name'=>'users/list-role'
+                    // ],
                 ]
             ],
 
@@ -47,10 +47,12 @@ class Navbar extends Component
 
     public function render(): View|Closure|string
     {
+        $route_name = Route::currentRouteName();
+        $parts = explode('/', $route_name);
+        $current_route = reset($parts);
         return view('components.backend.section.navbar', [
             'list_menu'=> $this->arrayNavMenu,
-            'current_route'=>request()->url(),
-            'curret_route'=>Route::currentRouteName()
+            'curret_route'=>$current_route,
         ]);
     }
 }

@@ -21,6 +21,7 @@ class UserController extends Controller
     public function list(Request $request)
     {
 
+
         $perPage = $request->input('perPage',self::PER_PAGE);
         $page = request()->query('page', 1);
 
@@ -35,9 +36,11 @@ class UserController extends Controller
     }
     public function formRegisterUser()
     {
+        $roles = RoleModel::all();
         return view('Backend.Users.add-user', [
+            'roles'=>$roles,
             'title' => 'Admin - add user',
-            'titleHeader' => 'Thêm nhân viên'
+            'titleHeader' => 'Form Nhân viên'
         ]);
     }
     public function registerUser(UserRequest $request)

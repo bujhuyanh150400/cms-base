@@ -3,7 +3,6 @@
 @section('title-header', 'Dashboard')
 
 @section('main')
-<div class="bg-red-50">
-    Đây là dashboard
-</div>
+   test
+
 @endsection
