@@ -10,38 +10,121 @@
 
 <body class="p-0 m-0 bg-stone-200 h-full relative">
     <section class="flex w-full h-full">
-        <x-backend.section.navbar/>
+        <x-backend.section.navbar />
         <div class="w-full">
             <x-backend.section.header>
                 <x-slot name="title">
                     @yield('title-header')
                 </x-slot>
             </x-backend.section.header>
-            <main class="bg-red-100 mx-4 mt-3 px-6 py-4 rounded-lg border-t border-r drop-shadow-xl backdrop-blur-sm bg-white/90 z-10">
+            <main
+                class="bg-red-100 mx-4 mt-3 px-6 py-4 rounded-lg border-t border-r drop-shadow-xl backdrop-blur-sm bg-white/90 z-10">
                 @yield('main')
             </main>
         </div>
     </section>
-
-    <div x-data="{ isOpen: true}">
-        <div  x-show="isOpen"
-              class="absolute bottom-5 right-4 w-full max-w-[20rem] bg-red-400 text-sm flex"
-              x-transition:enter="transition ease-out duration-300"
-              x-transition:enter-start="opacity-0 scale-90"
-              x-transition:enter-end="opacity-100 scale-100"
-              x-transition:leave="transition ease-in duration-300"
-              x-transition:leave-start="opacity-100 scale-100"
-              x-transition:leave-end="opacity-0 scale-90"
-        >
-            <p>test 1234</p>
-            <button @click="isOpen = false" class="ml-2 text-white">&times;</button>
-        </div>
-{{--        <button  @click="isOpen=true">Show Toast</button>--}}
-    </div>
+    <section id="toast-section"></section>
 </body>
 
 </html>
 
 
+<script type="module">
+    const navMenu = {
+        subNav: null,
+        menus: $('.navmenu__left-item'),
+        subMenus: $('.navmenu__left-sub-item'),
+        toggleSubNav: function() {
+            this.menus.each(function(index, menu) {
+                if ($(menu).data('sub-key') !== undefined) {
+                    let subKey = $(menu).data('sub-key');
+                    $(menu).on('click', function() {
+                        $(`.navmenu__left-sub-item[data-key="${subKey}"]`).slideToggle(100);
+                    })
+                }
+            });
+        },
+        prepareSubNav: function() {
+            this.subMenus.each(function(index, subMenu) {
+                const subMenuActive = $(subMenu).find("li[data-active='true']");
+                if (subMenuActive.length > 0) {
+                    $(subMenu).show();
+                } else {
+                    $(subMenu).hide();
+                }
+            });
 
+        },
+        start: function() {
+            this.prepareSubNav();
+            this.toggleSubNav();
+        }
+    }
+    navMenu.start();
 
+    const app = {
+        dropdown: {
+            dropdownBtn: $('.dropdown__btn'),
+            dropdownContent: $('.dropdown__content'),
+            initDropdown: function() {
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('.dropdown__container').length) {
+                        this.dropdownContent.slideUp(100);
+                    }
+                }.bind(this));
+                $('.dropdown__btn').on('click', this.toggleDropdown.bind(this));
+            },
+            toggleDropdown: function() {
+                const thisDropdown = $(`${this.dropdownBtn.data('dropdown')}`);
+                $('.dropdown__content').not(thisDropdown).hide();
+                thisDropdown.slideToggle(100);
+            }
+        },
+        showToast: (message, type = 'success', timeout = 5000) => {
+            let icon;
+            switch (type) {
+                case 'error':
+                    icon = '<i class="bi bi-exclamation-lg"></i>';
+                    break;
+                case 'warning':
+                    break;
+                    icon = '<i class="bi bi-cone"></i>';
+                case 'success':
+                    icon = '<i class="bi bi-check"></i>';
+                    break;
+                default:
+                    type = 'warning';
+                    icon = '<i class="bi bi-cone"></i>';
+                    break;
+            }
+            let html =
+                `<div class="toast-container" role="${type}"><div class="icon-holder">${icon}</div><div class="content">${message}</div><button type="button" class="btn-close"><i class="bi bi-x"></i></button></div>`;
+            $('#toast-section').append(html);
+            $('.toast-container').each(function(index, item) {
+                $(item).on('click', function() {
+                    $(this).hide(100);
+                    setTimeout(() => {
+                        $(this).remove()
+                    }, 100)
+                })
+                setTimeout(() => {
+                    $(this).fadeOut(3000);
+                    setTimeout(() => {
+                        $(this).remove()
+                    }, 3000)
+                }, timeout)
+            })
+        },
+
+        start: function() {
+            this.dropdown.initDropdown();
+        }
+    }
+    app.start();
+    @if (session('success'))
+        app.showToast('{{ session('success') }}', 'success');
+    @endif
+    @if (session('error'))
+        app.showToast('{{ session('error') }}', 'error');
+    @endif
+</script>

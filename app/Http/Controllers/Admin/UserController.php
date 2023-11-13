@@ -57,6 +57,7 @@ class UserController extends Controller
             'gender' => $request->input('gender'),
             'access_login' => $request->input('access_login'),
         ];
+
         $user = UsersModel::create($data);
         if ($user) {
             session()->flash('success', 'Lưu trữ dữ liệu thành công!');

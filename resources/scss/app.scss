@@ -2,3 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
+#navmenu__left-section {
+    @apply relative h-full min-h-screen bg-[#0E162A] text-white duration-300 w-72;
+    #navmenu__left-container {
+        @apply flex flex-col gap-2;
+
+        .navmenu__left-item {
+            @apply text-gray-200 text-sm flex items-center gap-2 cursor-pointer p-3 duration-200 hover:bg-[#1E283A] rounded-md;
+            .navmenu__left-sub-item {
+                @apply flex flex-col;
+            }
+        }
+    }
+}
+
+.dropdown__container {
+    position: relative;
+    .dropdown__btn {
+    }
+    .dropdown__content {
+        @apply absolute hidden w-auto min-w-[10rem] top-10 right-0 h-auto bg-white rounded-lg shadow-2xl py-2 z-20;
+    }
+}
+
+@keyframes toastAnimate {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+#toast-section {
+    @apply fixed w-full max-w-xs bg-transparent h-auto right-2 bottom-5 z-50 flex flex-col gap-2;
+    .toast-container {
+        animation: toastAnimate 0.3s;
+        &[role="success"] {
+            @apply relative flex items-center justify-between w-full p-4 text-gray-500 bg-green-100 rounded-lg shadow-xl transition duration-200 hover:-translate-y-1 cursor-pointer;
+            .icon-holder {
+                @apply inline-flex items-center justify-center w-8 h-8 text-green-600 text-3xl;
+            }
+        }
+
+        &[role="error"] {
+            @apply relative flex items-center w-full p-4 text-gray-500 bg-red-100 rounded-lg shadow-xl transition duration-200 hover:-translate-y-1 cursor-pointer;
+            .icon-holder {
+                @apply inline-flex items-center justify-center w-8 h-8 text-red-600 text-3xl;
+            }
+        }
+
+        &[role="warning"] {
+            @apply relative flex items-center w-full p-4 text-gray-500 bg-yellow-100 rounded-lg shadow-xl transition duration-200 hover:-translate-y-1 cursor-pointer;
+            .icon-holder {
+                @apply inline-flex items-center justify-center w-8 h-8 text-yellow-600 text-3xl;
+            }
+        }
+        .content {
+            @apply ml-3 text-sm font-normal max-w-full break-all;
+        }
+        .btn-close {
+            @apply ml-auto text-gray-500 -mx-1.5 -my-1.5  hover:scale-150;
+        }
+    }
+}
