@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserRequest;
 use App\Models\Admin\RoleModel;
-use App\Models\UsersModel;
+use App\Models\Admin\UsersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-
+        $roles = RoleModel::all();
 
         $perPage = $request->input('perPage',self::PER_PAGE);
         $page = request()->query('page', 1);
@@ -30,6 +30,7 @@ class UserController extends Controller
         return view('Backend.Users.list', [
             'title' => 'Admin - list user',
             'titleHeader' => 'Danh sách nhân viên',
+            'roles'=> $roles,
             'users'=>$users
         ]);
 
@@ -55,9 +56,9 @@ class UserController extends Controller
             'birth' => $request->input('birth'),
             'role' => $request->input('role'),
             'gender' => $request->input('gender'),
+            'updated_by' => Auth::user()->id,
             'access_login' => $request->input('access_login'),
         ];
-
         $user = UsersModel::create($data);
         if ($user) {
             session()->flash('success', 'Lưu trữ dữ liệu thành công!');

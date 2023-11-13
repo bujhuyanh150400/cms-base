@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,6 +18,7 @@ class UsersModel extends Authenticatable
     {
         return 'id';
     }
+
     public function fill(array $attributes)
     {
         foreach ($attributes as $key => $value) {

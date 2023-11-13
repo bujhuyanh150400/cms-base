@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('password');
             $table->timestamp('birth');
             $table->smallInteger('gender')->default(1);
-            $table->integer('role')->default(1);
             $table->integer('access_login')->default(0);
             $table->string('phone');
             $table->text('address');

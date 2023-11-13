@@ -23,22 +23,25 @@
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200">
                 <tr>
-                    <th scope="col" class="px-6 py-3 w-10">
+                    <th scope="col" class="px-6 py-1 w-10 text-start">
                         ID
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-1">
                         Tên
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-1">
                         Email
                     </th>
-                    <th scope="col" class="px-6 py-3 w-[2rem]">
-                        vị trí
+                    <th scope="col" class="px-6 py-1 w-[2rem]">
+                       Vị trí
                     </th>
-                    <th scope="col" class="px-6 py-3 w-[2rem]">
-                        giới tính
+                    <th scope="col" class="px-6 py-1 w-[2rem]">
+                        Giới tính
                     </th>
-                    <th scope="col" class="px-6 py-3 w-[2rem]">
+                    <th scope="col" class="px-6 py-1 w-[2rem] text-center">
+                        Quyền
+                    </th>
+                    <th scope="col" class="px-6 py-1 w-[2rem]">
                         Được đăng nhập
                     </th>
                 </tr>
@@ -46,7 +49,7 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr class="bg-white border-b hover:bg-gray-50 ">
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 text-start">
                             {{ $user->id }}
                         </td>
                         <td class="px-6 py-4 ">
@@ -62,13 +65,17 @@
                             {{ $user->gender == 1 ? 'Nam' : 'Nữ' }}
                         </td>
                         <td class="px-6 py-4">
+                            {{ $user->role }}
+                        </td>
+                        <td class="px-6 py-4">
                             {{ $user->access_login == 1 ? 'Có' : 'Không' }}
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        {!! $users->links() !!}
     </div>
 
-    {!! $users->links() !!}
+
 @endsection
