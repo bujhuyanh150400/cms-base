@@ -14,9 +14,11 @@ class RoleModel extends Model
     {
         return 'id';
     }
+    protected $primaryKey = 'id';
+
     public function users()
     {
-        return $this->hasMany('App\Models\Admin\UsersModel');
+        return $this->belongsToMany(UsersModel::class, 'tbl_role_users','role_id','user_id');
     }
     protected $fillable = [
         'id',
@@ -25,4 +27,5 @@ class RoleModel extends Model
         'updated_at' ,
         'updated_by' ,
     ];
+
 }

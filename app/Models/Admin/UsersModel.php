@@ -18,6 +18,7 @@ class UsersModel extends Authenticatable
     {
         return 'id';
     }
+    protected $primaryKey = 'user_id';
 
     public function fill(array $attributes)
     {
@@ -37,7 +38,6 @@ class UsersModel extends Authenticatable
         'birth' ,
         'gender' ,
         'address',
-        'role' ,
         'access_login',
         'phone',
         'address',
@@ -47,5 +47,9 @@ class UsersModel extends Authenticatable
     public function setUserPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function role(){
+        return $this->belongsToMany(RoleModel::class ,  'tbl_role_users','user_id','role_id');
     }
 }

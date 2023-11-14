@@ -34,14 +34,14 @@ class Navbar extends Component
                         'action' => route('users/list'),
                         'route_name'=>'users'
                     ],
-                    // [
-                    //     'title'=>trans('lang_admin.list-role'),
-                    //     'action' => route('users/list-role'),
-                    //     'route_name'=>'users/list-role'
-                    // ],
+                     [
+                         'title'=>trans('lang_admin.list-role'),
+                         'action' => route('role/list'),
+                         'route_name'=>'role'
+                     ],
                 ]
             ],
-           
+
 
         ];
     }

@@ -54,13 +54,15 @@ class UserController extends Controller
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
             'birth' => $request->input('birth'),
-            'role' => $request->input('role'),
             'gender' => $request->input('gender'),
             'updated_by' => Auth::user()->id,
             'access_login' => $request->input('access_login'),
         ];
         $user = UsersModel::create($data);
         if ($user) {
+            $roleId = $request->input('role');
+            // Liên kết vai trò với người dùng mới
+            $user->role()->attach($roleId);
             session()->flash('success', 'Lưu trữ dữ liệu thành công!');
             return redirect()->route('users/list');
         } else {
@@ -80,14 +82,14 @@ class UserController extends Controller
             'roles'=>$roleData
         ]);
     }
-    public function formRegistRole(Request $request){
+    public function formRegisterRole(Request $request){
         return view('Backend.Users.add-role',[
             'title' => 'Admin - add roles',
             'titleHeader' => 'Thêm Role',
         ]);
     }
 
-    public function registRole (Request $request){
+    public function registerRole (Request $request){
         $request->validate([
             'title' => 'required|min:4|max:50',
             'description' => 'required|max:255',

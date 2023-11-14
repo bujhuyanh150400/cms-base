@@ -22,9 +22,9 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('/admin/users/register', [UserController::class, 'formRegisterUser'])->name('users/register');
     Route::post('/admin/users/register-submit', [UserController::class, 'registerUser'])->name('users/register-submit');
 
-    // Route::get('/admin/roles/list', [UserController::class, 'listRole'])->name('roles/list');
-    // Route::get('/admin/users/form-register-roles', [UserController::class, 'formRegistRole'])->name('users/form-register-role');
-    // Route::post('/admin/users/register-roles', [UserController::class, 'registRole'])->name('users/register-role');
+     Route::get('/admin/role/list', [UserController::class, 'listRole'])->name('role/list');
+     Route::get('/admin/role/form-register-roles', [UserController::class, 'formRegisterRole'])->name('role/register');
+     Route::post('/admin/role/register-roles', [UserController::class, 'registerRole'])->name('role/register-submit');
 
 });
 

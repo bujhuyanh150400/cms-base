@@ -10,11 +10,11 @@
         <ul class="inline-flex items-center p-2 gap-2 text-sm rounded-lg bg-gray-300/50">
             <li class="font-medium cursor-pointer px-2 py-1 hover:text-purple-800"
                 onclick="window.location.href = '{{ route('users/list') }}'">
-                Danh sách nhân viên
+                Danh sách
             </li>
             <li
                 class="bg-white/60 text-purple-800 px-2 py-1 rounded-lg font-medium drop-shadow-2xl border border-white cursor-pointer hover:text-purple-800">
-                Form nhân viên
+                Form
             </li>
         </ul>
     </div>

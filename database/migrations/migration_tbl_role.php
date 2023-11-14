@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbl_role', function (Blueprint $table) {
-            $table->id('id_role');
+            $table->id('id');
             $table->string('title');
             $table->text('description');
             $table->timestamp('created_at')->default(now());
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tbl_role');
     }
 };
