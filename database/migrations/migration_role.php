@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('tbl_role', function (Blueprint $table) {
-            $table->id('id');
+        Schema::create('role', function (Blueprint $table) {
+            $table->id('role_id');
             $table->string('title');
             $table->text('description');
             $table->timestamp('created_at')->default(now());
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->default(null);
             $table->bigInteger('updated_by')->default(null);
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_role');
+        Schema::dropIfExists('role');
     }
 };

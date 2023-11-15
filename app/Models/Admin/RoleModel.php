@@ -9,16 +9,16 @@ class RoleModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbl_role';
+    protected $table = 'role';
     public function getKeyName()
     {
         return 'id';
     }
     protected $primaryKey = 'id';
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(UsersModel::class, 'tbl_role_users','role_id','user_id');
+        return $this->belongsToMany(UsersModel::class, 'user-role');
     }
     protected $fillable = [
         'id',

@@ -95,7 +95,7 @@ class UserController extends Controller
             'description' => 'required|max:255',
         ]);
         $result = RoleModel::create([
-            'id_role'=> $this->getIdAsTimestamp(),
+            'id'=> $this->getIdAsTimestamp(),
             'title'=>$request->input('title'),
             'description'=>$request->input('description'),
             'updated_by' => Auth::user()->id

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->timestamp('birth');
             $table->smallInteger('gender')->default(1);
             $table->integer('access_login')->default(0);
-            $table->string('phone');
-            $table->text('address');
+            $table->string('phone')->default(null);
+            $table->text('address')->default(null);
             $table->timestamp('created_at')->default(now());
             $table->timestamp('updated_at')->default(null);
             $table->bigInteger('updated_by')->default(null);

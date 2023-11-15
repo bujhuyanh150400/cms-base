@@ -19,8 +19,6 @@
         </ul>
     </div>
 
-
-
     <form action="{{ route('users/register-submit') }}" method="POST">
         @csrf
         @method('POST')
@@ -149,7 +147,7 @@
                     class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('role') border-red-300 outline-red-300 @enderror">
                     <option value="">Chọn quyền</option>
                     @foreach ($roles as $role)
-                        <option value="{{ $role['id_role'] }}" @if ((int)$role['id_role'] === old('role')) selected @endif>
+                        <option value="{{ $role['role_id'] }}" @if ((int)$role['role_id'] === old('role')) selected @endif>
                             {{ $role['title'] }}</option>
                     @endforeach
                 </select>

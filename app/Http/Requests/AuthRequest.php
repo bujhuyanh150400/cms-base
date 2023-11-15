@@ -17,7 +17,6 @@ class AuthRequest extends FormRequest
             'password' => 'required|min:8|max:36',
         ];
     }
-
     public function messages()
     {
         return [

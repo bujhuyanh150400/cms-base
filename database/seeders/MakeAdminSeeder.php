@@ -14,7 +14,7 @@ class MakeAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('tbl_users')->insert([
+        DB::table('user')->insert([
             'id'=> 15042000,
             'name' => 'Bùi Huy Anh',
             'email' => 'bujhuyanh150400@gmail.com',
@@ -22,14 +22,24 @@ class MakeAdminSeeder extends Seeder
             'birth' => '2000-04-15 00:00:00',
             'address' => 'VN',
             'gender' => 1,
-            'role' => 1,
             'access_login' => 1,
             'phone' => '0917095494',
             'created_at'=> now(),
             'updated_at'=> now(),
             'updated_by'=> 15042000,
             'remember_token'=> null,
-
+        ]);
+        DB::table('role')->insert([
+            'id'=> 16121999,
+            'title' => 'Admin',
+            'description' => 'Quyền Admin quản lý toàn bộ trang web này',
+            'created_at'=> now(),
+            'updated_at'=> now(),
+            'updated_by'=> 15042000,
+        ]);
+        DB::table('user_role')->insert([
+            'role_id'=> 16121999,
+            'user_id'=> 15042000,
         ]);
     }
 }
