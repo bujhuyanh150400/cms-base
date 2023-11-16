@@ -5,7 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoleModel extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,8 @@ class RoleModel extends Model
 
     public function user()
     {
-        return $this->belongsToMany(UsersModel::class, 'user-role');
+        return $this->belongsToMany(User::class );
+
     }
     protected $fillable = [
         'id',

@@ -15,7 +15,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required','email',Rule::unique('tbl_users')],
+            'email' => ['required','email',Rule::unique('user')],
             'name' => 'required',
             'password' => 'required|min:8|max:36',
             'conf_pass' => 'required|min:8|max:36|same:password',
@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
             'birth' => 'required|date',
             'gender' => 'required|in:1,2',
             'role' => 'required',
-            'access_login' => 'required|in:0,1',
+            'access_login' => 'required',
         ];
     }
     public function messages()
@@ -60,7 +60,6 @@ class UserRequest extends FormRequest
             'role.required' => 'Vui lòng chọn vai trò của người dùng.',
 
             'access_login.required' => 'Vui lòng chọn quyền truy cập đăng nhập.',
-            'access_login.in' => 'Quyền truy cập đăng nhập không hợp lệ.',
         ];
     }
 }

@@ -10,12 +10,11 @@ return new class extends Migration
     {
         // Dành cho quan hệ n-n (many-to-many) bảng giữa bảng user và role
 
-        Schema::create('user_role', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_id');
-
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
         });
     }
 
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_role_users');
+        Schema::dropIfExists('role_user');
     }
 };

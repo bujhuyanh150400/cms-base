@@ -12,19 +12,23 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth.admin')->group(function () {
-    Route::get('/admin', [DashboardController::class,'show'])->name('admin-dashboard');
     Route::get('/admin/login', [AuthController::class, 'show'])->name('show-login-admin');
     Route::post('/admin/login/auth', [AuthController::class, 'login'])->name('login-admin');
     Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout-admin');
 
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [DashboardController::class, 'show'])->name('admin-dashboard');
 
-    Route::get('/admin/users/list', [UserController::class, 'list'])->name('users/list');
-    Route::get('/admin/users/register', [UserController::class, 'formRegisterUser'])->name('users/register');
-    Route::post('/admin/users/register-submit', [UserController::class, 'registerUser'])->name('users/register-submit');
-
-     Route::get('/admin/role/list', [UserController::class, 'listRole'])->name('role/list');
-     Route::get('/admin/role/form-register-roles', [UserController::class, 'formRegisterRole'])->name('role/register');
-     Route::post('/admin/role/register-roles', [UserController::class, 'registerRole'])->name('role/register-submit');
-
+        Route::prefix('users')->group(function () {
+            Route::get('list', [UserController::class, 'list'])->name('users/list');
+            Route::get('detail', [UserController::class, 'detail'])->name('users/detail');
+            Route::get('register/{id?}', [UserController::class, 'formRegisterUser'])->name('users/register')->whereNumber('id');
+            Route::post('register-submit', [UserController::class, 'registerUser'])->name('users/register-submit');
+        });
+        Route::prefix('role')->group(function () {
+            Route::get('list', [UserController::class, 'listRole'])->name('role/list');
+            Route::get('register', [UserController::class, 'formRegisterRole'])->name('role/register');
+            Route::post('register-submit', [UserController::class, 'registerRole'])->name('role/register-submit');
+        });
+    });
 });
-

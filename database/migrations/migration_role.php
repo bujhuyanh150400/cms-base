@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('role', function (Blueprint $table) {
-            $table->id('role_id');
+            $table->id();
             $table->string('title');
             $table->text('description');
             $table->timestamp('created_at')->default(now());

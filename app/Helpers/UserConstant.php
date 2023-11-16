@@ -7,7 +7,7 @@ class UserConstant
     const ACCESS_LOGIN = 20;
     const UNACCESS_LOGIN = 10;
 
-    public function getListAccessLogin()
+    static function getListAccessLogin()
     {
         return [
             self::ACCESS_LOGIN => [
@@ -20,5 +20,6 @@ class UserConstant
             ]
         ];
     }
+
 
 }

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\UserConstant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserRequest;
-use App\Models\Admin\RoleModel;
-use App\Models\Admin\UsersModel;
+use App\Models\Admin\Role;
+use App\Models\Admin\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,26 +21,24 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $roles = RoleModel::all();
 
-        $perPage = $request->input('perPage',self::PER_PAGE);
+        $perPage = $request->input('perPage', self::PER_PAGE);
         $page = request()->query('page', 1);
 
-        $users = UsersModel::paginate($perPage, ['*'], 'page', $page);
+        $users = User::paginate($perPage, ['*'], 'page', $page);
 
         return view('Backend.Users.list', [
             'title' => 'Admin - list user',
             'titleHeader' => 'Danh sách nhân viên',
-            'roles'=> $roles,
-            'users'=>$users
+            'users' => $users
         ]);
-
     }
-    public function formRegisterUser()
+    public function formRegisterUser(User $id)
     {
-        $roles = RoleModel::all();
         return view('Backend.Users.add-user', [
-            'roles'=>$roles,
+            'user' => $id,
+            'roles' => Role::all(),
+            'accessLoginList' => UserConstant::getListAccessLogin(),
             'title' => 'Admin - add user',
             'titleHeader' => 'Form Nhân viên'
         ]);
@@ -47,7 +46,7 @@ class UserController extends Controller
     public function registerUser(UserRequest $request)
     {
         $data = [
-            'id'=> $this->getIdAsTimestamp(),
+            'id' => $this->getIdAsTimestamp(),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
@@ -58,7 +57,7 @@ class UserController extends Controller
             'updated_by' => Auth::user()->id,
             'access_login' => $request->input('access_login'),
         ];
-        $user = UsersModel::create($data);
+        $user = User::create($data);
         if ($user) {
             $roleId = $request->input('role');
             // Liên kết vai trò với người dùng mới
@@ -70,34 +69,37 @@ class UserController extends Controller
             return redirect()->back()->withInput();
         }
     }
-    public function listRole(Request $request){
-        $perPage = $request->input('perPage',self::PER_PAGE);
+    public function listRole(Request $request)
+    {
+        $perPage = $request->input('perPage', self::PER_PAGE);
         $page = request()->query('page', 1);
 
-        $roleData = RoleModel::paginate($perPage, ['*'], 'page', $page);
+        $roleData = Role::paginate($perPage, ['*'], 'page', $page);
 
-        return view('Backend.Users.list-role',[
+        return view('Backend.Users.list-role', [
             'title' => 'Admin - list roles',
             'titleHeader' => 'Danh sách Role',
-            'roles'=>$roleData
+            'roles' => $roleData
         ]);
     }
-    public function formRegisterRole(Request $request){
-        return view('Backend.Users.add-role',[
+    public function formRegisterRole(Request $request)
+    {
+        return view('Backend.Users.add-role', [
             'title' => 'Admin - add roles',
             'titleHeader' => 'Thêm Role',
         ]);
     }
 
-    public function registerRole (Request $request){
+    public function registerRole(Request $request)
+    {
         $request->validate([
             'title' => 'required|min:4|max:50',
             'description' => 'required|max:255',
         ]);
-        $result = RoleModel::create([
-            'id'=> $this->getIdAsTimestamp(),
-            'title'=>$request->input('title'),
-            'description'=>$request->input('description'),
+        $result = Role::create([
+            'id' => $this->getIdAsTimestamp(),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
             'updated_by' => Auth::user()->id
         ]);
         if ($result) {
@@ -108,5 +110,4 @@ class UserController extends Controller
             return redirect()->back()->withInput();
         }
     }
-
 }

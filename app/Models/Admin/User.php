@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class UsersModel extends Authenticatable
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -50,6 +50,6 @@ class UsersModel extends Authenticatable
     }
 
     public function role(){
-        return $this->belongsToMany(RoleModel::class ,  'user_role');
+        return $this->belongsToMany(Role::class );
     }
 }

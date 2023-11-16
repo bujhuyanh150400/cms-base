@@ -37,7 +37,7 @@ class MakeAdminSeeder extends Seeder
             'updated_at'=> now(),
             'updated_by'=> 15042000,
         ]);
-        DB::table('user_role')->insert([
+        DB::table('role_user')->insert([
             'role_id'=> 16121999,
             'user_id'=> 15042000,
         ]);

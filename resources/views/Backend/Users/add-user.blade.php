@@ -114,10 +114,10 @@
                     Ngày sinh
                 </label>
                 <input value="{{ old('birth') }}"
-                       class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('birth') border-red-300 outline-red-300 @enderror"
-                       type="date" id="birth" name="birth" placeholder="Nhập số điện thoại" />
+                    class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('birth') border-red-300 outline-red-300 @enderror"
+                    type="date" id="birth" name="birth" placeholder="Nhập số điện thoại" />
                 @error('birth')
-                <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
+                    <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
                 @enderror
             </div>
             {{-- Gender --}}
@@ -129,8 +129,8 @@
                 <select name="gender"
                     class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('gender') border-red-300 outline-red-300 @enderror">
                     <option value="">Lựa chọn</option>
-                    <option value="1" @if ((int)old('gender') === 1) selected @endif>Nam</option>
-                    <option value="2" @if ((int)old('gender') === 2) selected @endif>Nữ</option>
+                    <option value="1" @if ((int) old('gender') === 1) selected @endif>Nam</option>
+                    <option value="2" @if ((int) old('gender') === 2) selected @endif>Nữ</option>
                 </select>
                 @error('gender')
                     <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
@@ -147,7 +147,7 @@
                     class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('role') border-red-300 outline-red-300 @enderror">
                     <option value="">Chọn quyền</option>
                     @foreach ($roles as $role)
-                        <option value="{{ $role['role_id'] }}" @if ((int)$role['role_id'] === old('role')) selected @endif>
+                        <option value="{{ $role['id'] }}" @if ((int) $role['id'] == old('role')) selected @endif>
                             {{ $role['title'] }}</option>
                     @endforeach
                 </select>
@@ -165,8 +165,10 @@
                 <select name="access_login"
                     class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('access_login') border-red-300 outline-red-300 @enderror">
                     <option value="">Lựa chọn</option>
-                    <option value="1" @if ((int)old('access_login') === 1) selected @endif>Có</option>
-                    <option value="0" @if ((int)old('access_login') === 0) selected @endif>Không</option>
+                    @foreach ($accessLoginList as $accessLogin)
+                        <option value="{{ $accessLogin['value'] }}" @if ((int) $accessLogin['value'] == old('access_login')) selected @endif>
+                            {{ $accessLogin['text'] }}</option>
+                    @endforeach
                 </select>
                 @error('access_login')
                     <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
