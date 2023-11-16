@@ -13,7 +13,7 @@
                 Danh sách
             </li>
             <li class="font-medium cursor-pointer px-2 py-1 hover:text-purple-800"
-                onclick="window.location.href = '{{ route('users/register') }}'">
+                onclick="window.location.href = '{{ route('users/add') }}'">
                 Form
             </li>
         </ul>
@@ -68,7 +68,7 @@
                                     <i class="bi bi-people"></i> Chi tiết
                                 </button>
                                 <button type="button"
-                                        onclick="window.location.href = '{{ route('users/register',$user->id) }}'"
+                                        onclick="window.location.href = '{{ route('users/edit',$user->id) }}'"
                                         class="px-4 py-2 rounded-lg bg-gradient-to-br from-violet-900 to-pink-500 text-white text-sm font-medium duration-200 outline-none border-none hover:-translate-y-0.5 hover:shadow-lg ">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </button>

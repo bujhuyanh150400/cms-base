@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\HRMController;
 
 
 
@@ -20,15 +20,17 @@ Route::middleware('auth.admin')->group(function () {
         Route::get('/', [DashboardController::class, 'show'])->name('admin-dashboard');
 
         Route::prefix('users')->group(function () {
-            Route::get('list', [UserController::class, 'list'])->name('users/list');
-            Route::get('detail', [UserController::class, 'detail'])->name('users/detail');
-            Route::get('register/{id?}', [UserController::class, 'formRegisterUser'])->name('users/register')->whereNumber('id');
-            Route::post('register-submit', [UserController::class, 'registerUser'])->name('users/register-submit');
+            Route::get('list', [HRMController::class, 'listUser'])->name('users/list');
+            Route::get('detail/{id}', [HRMController::class, 'detailUser'])->name('users/detail')->whereNumber('id');
+            Route::get('add', [HRMController::class, 'showAddUser'])->name('users/add');
+            Route::post('add', [HRMController::class, 'submitAddUser'])->name('users/add-submit');
+            Route::get('edit/{id?}', [HRMController::class, 'showEditUser'])->name('users/edit')->whereNumber('id');
+            Route::post('edit/{id?}', [HRMController::class, 'submitEditUser'])->name('users/edit-submit');
         });
         Route::prefix('role')->group(function () {
-            Route::get('list', [UserController::class, 'listRole'])->name('role/list');
-            Route::get('register', [UserController::class, 'formRegisterRole'])->name('role/register');
-            Route::post('register-submit', [UserController::class, 'registerRole'])->name('role/register-submit');
+            Route::get('list', [HRMController::class, 'listRole'])->name('role/list');
+            Route::get('register', [HRMController::class, 'formRegisterRole'])->name('role/register');
+            Route::post('register-submit', [HRMController::class, 'registerRole'])->name('role/register-submit');
         });
     });
 });
