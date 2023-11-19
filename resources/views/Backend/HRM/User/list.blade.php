@@ -64,6 +64,7 @@
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center items-center gap-2">
                                 <button type="button"
+                                        onclick="window.location.href = '{{ route('users/detail',$user->id) }}'"
                                         class="px-4 py-2 rounded-lg bg-[#0E162A] text-white text-sm font-medium duration-200 outline-none border-none hover:-translate-y-0.5 hover:shadow-lg ">
                                     <i class="bi bi-people"></i> Chi tiết
                                 </button>

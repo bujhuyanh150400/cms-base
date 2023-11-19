@@ -21,11 +21,14 @@ Route::middleware('auth.admin')->group(function () {
 
         Route::prefix('users')->group(function () {
             Route::get('list', [HRMController::class, 'listUser'])->name('users/list');
+
             Route::get('detail/{id}', [HRMController::class, 'detailUser'])->name('users/detail')->whereNumber('id');
+
             Route::get('add', [HRMController::class, 'showAddUser'])->name('users/add');
-            Route::post('add', [HRMController::class, 'submitAddUser'])->name('users/add-submit');
+            Route::post('add-submit', [HRMController::class, 'submitAddUser'])->name('users/add-submit');
+
             Route::get('edit/{id?}', [HRMController::class, 'showEditUser'])->name('users/edit')->whereNumber('id');
-            Route::post('edit/{id?}', [HRMController::class, 'submitEditUser'])->name('users/edit-submit');
+            Route::post('edit-submit/{id?}', [HRMController::class, 'submitEditUser'])->name('users/edit-submit')->whereNumber('id');
         });
         Route::prefix('role')->group(function () {
             Route::get('list', [HRMController::class, 'listRole'])->name('role/list');

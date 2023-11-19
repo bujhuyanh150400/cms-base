@@ -19,9 +19,8 @@
         </ul>
     </div>
 
-    <form action="{{ route('users/edit-submit') }}" method="POST">
+    <form action="{{ route('users/edit-submit',$user->id) }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="py-8 grid grid-cols-4 gap-6">
             {{-- Email --}}
             <div class="col-span-2 flex flex-col gap-1">
@@ -85,9 +84,9 @@
                     <i class="bi bi-calendar me-1"></i>
                     Ngày sinh
                 </label>
-                <input value="{{ old('birth', \Carbon\Carbon::parse($user->birth)->format('d/m/Y')) }}"
-                       class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('birth') border-red-300 outline-red-300 @enderror"
-                       type="date" id="birth" name="birth" />
+                <input value="{{ old('birth', $user->birth) }}"
+                       class="datepicker rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('birth') border-red-300 outline-red-300 @enderror"
+                       type="text" id="birth" name="birth" />
                 @error('birth')
                 <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
                 @enderror
@@ -101,8 +100,8 @@
                 <select name="gender"
                         class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('gender') border-red-300 outline-red-300 @enderror">
                     <option value="">Lựa chọn</option>
-                    <option value="1" @if ((int) old('gender') === 1) selected @endif>Nam</option>
-                    <option value="2" @if ((int) old('gender') === 2) selected @endif>Nữ</option>
+                    <option value="1" @if ((int) old('gender',$user->gender) === 1) selected @endif>Nam</option>
+                    <option value="2" @if ((int) old('gender',$user->gender) === 2) selected @endif>Nữ</option>
                 </select>
                 @error('gender')
                 <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
@@ -119,7 +118,7 @@
                         class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('role') border-red-300 outline-red-300 @enderror">
                     <option value="">Chọn quyền</option>
                     @foreach ($roles as $role)
-                        <option value="{{ $role['id'] }}" @if ((int) $role['id'] == old('role')) selected @endif>
+                        <option value="{{ $role['id'] }}" @if ((int) $role['id'] == old('role',$user->role->first()->id)) selected @endif>
                             {{ $role['title'] }}</option>
                     @endforeach
                 </select>
@@ -138,7 +137,7 @@
                         class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md @error('access_login') border-red-300 outline-red-300 @enderror">
                     <option value="">Lựa chọn</option>
                     @foreach ($accessLoginList as $accessLogin)
-                        <option value="{{ $accessLogin['value'] }}" @if ((int) $accessLogin['value'] == old('access_login')) selected @endif>
+                        <option value="{{ $accessLogin['value'] }}" @if ((int) $accessLogin['value'] == old('access_login', $user->access_login)) selected @endif>
                             {{ $accessLogin['text'] }}</option>
                     @endforeach
                 </select>
