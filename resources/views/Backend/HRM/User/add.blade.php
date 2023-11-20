@@ -182,10 +182,10 @@
                 />
                 <div class="inline-flex items-center border border-gray-300 bg-white p-1 rounded-lg gap-2">
                     <label for="avatar"
-                           class="px-4 py-2 w-auto h-auto rounded-lg bg-gradient-to-br from-violet-900 to-pink-500 text-white text-sm font-medium duration-200 outline-none hover:shadow-lg">
+                           class="px-4 py-2 w-auto cursor-pointer h-auto rounded-lg bg-gradient-to-br from-violet-900 to-pink-500 text-white text-sm font-medium duration-200 outline-none hover:shadow-lg">
                     <i class="bi bi-cloud-upload me-1"></i> Chọn tệp
                     </label>
-                    <div id="file-name" class="mt-4 text-gray-700"></div>
+                    <div id="file-name" class="text-gray-500 text-sm"></div>
                 </div>
                 <script>
                     function displayFileName(input) {
