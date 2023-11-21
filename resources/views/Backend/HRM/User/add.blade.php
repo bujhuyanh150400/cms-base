@@ -187,13 +187,7 @@
                     </label>
                     <div id="file-name" class="text-gray-500 text-sm"></div>
                 </div>
-                <script>
-                    function displayFileName(input) {
-                        const fileNameElement = document.getElementById('file-name');
-                        const fileName = input.files[0]?.name || 'Chưa chọn tệp';
-                        fileNameElement.textContent = 'Tệp đã chọn: ' + fileName;
-                    }
-                </script>
+
             </div>
         </div>
         <div class="flex items-center justify-end gap-2 col-span-full">
@@ -208,5 +202,5 @@
             </button>
         </div>
     </form>
-
 @endsection
+

@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('birth');
+            $table->text('avatar')->default();
             $table->smallInteger('gender')->default(1);
-            $table->integer('access_login')->default(0);
+            $table->integer('access_login');
             $table->string('phone')->default(null);
             $table->text('address')->default(null);
             $table->timestamp('created_at')->useCurrent();

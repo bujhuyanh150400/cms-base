@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-    <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
-    <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -122,8 +119,6 @@
 
     }
     app.start();
-
-
     @if (session('success'))
     app.showToast('{{ session('success') }}', 'success');
     @endif
@@ -132,19 +127,9 @@
     @endif
 </script>
 <script>
-    function previewImage(event,previewAvatar) {
-        const preview = $(previewAvatar);
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.empty();
-                preview.css({
-                    "background-image": `url("${e.target.result}")`
-                })
-                URL.revokeObjectURL(e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
+    function displayFileName(input) {
+        const fileNameElement = document.getElementById('file-name');
+        const fileName = input.files[0]?.name || 'Chưa chọn tệp';
+        fileNameElement.textContent = 'Tệp đã chọn: ' + fileName;
     }
 </script>

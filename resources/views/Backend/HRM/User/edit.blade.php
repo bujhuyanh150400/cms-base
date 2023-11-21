@@ -145,6 +145,29 @@
                 <span class="text-red-500 text-xs font-medium">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="col-span-2 flex flex-col gap-1">
+                <span class="text-sm font-medium  @error('avatar') text-red-500 @enderror">
+                    <i class="bi bi-card-image me-1"></i>
+                    Ảnh đại diện
+                </span>
+                <input
+                    id="avatar"
+                    name="avatar"
+                    type="file"
+                    accept=".jpg,.jpeg,.png,.gif,.svg,.webp"
+                    hidden
+                    onchange="displayFileName(this)"
+                />
+                <div class="inline-flex items-center border border-gray-300 bg-white p-1 rounded-lg gap-2">
+                    <label for="avatar"
+                           class="px-4 py-2 w-auto cursor-pointer h-auto rounded-lg bg-gradient-to-br from-violet-900 to-pink-500 text-white text-sm font-medium duration-200 outline-none hover:shadow-lg">
+                        <i class="bi bi-cloud-upload me-1"></i> Chọn tệp
+                    </label>
+                    <div id="file-name" class="text-gray-500 text-sm"></div>
+                </div>
+
+            </div>
+
         </div>
 
 
