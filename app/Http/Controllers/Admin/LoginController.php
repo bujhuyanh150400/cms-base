@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
     public function __construct()
     {
@@ -21,7 +21,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(AuthRequest $request){
+    public function login(LoginRequest $request){
         $rememberMe = false;
         if($request->input('remember_me') == 1){
             $rememberMe = true;

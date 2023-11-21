@@ -41,7 +41,17 @@ class Navbar extends Component
                      ],
                 ]
             ],
-
+            [
+                'title' => 'Quản lý sản phẩm',
+                'icon' => '<i class="bi bi-box"></i>',
+                'sub_menu'=>[
+                    [
+                        'title'=> 'Quản lý menu',
+                        'action' => route('menu/list'),
+                        'route_name'=>'menu'
+                    ],
+                ]
+            ],
 
         ];
     }
