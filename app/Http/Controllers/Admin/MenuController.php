@@ -16,11 +16,13 @@ class MenuController extends Controller
 
     public function show()
     {
-        $menus = Menu::all();
+        $menus = Menu::with('children')->whereNull('parent_id')->get();
+        $optionMenu = Menu::all();
         return view('Backend.Menu.list', [
             'title' => 'Admin - quản lý menu',
             'titleHeader' => 'Quản lý menu',
-            'menus' => $menus
+            'menus' => $menus,
+            'optionMenu'=>$optionMenu
         ]);
     }
 
@@ -28,7 +30,7 @@ class MenuController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:50',
-            'parent-id' => 'interger',
+            'parent-id' => 'integer',
             'description' => 'max:255',
         ], [
             'title.required' => 'Vui lòng nhập tiêu đề.',
@@ -46,7 +48,7 @@ class MenuController extends Controller
             $res = Menu::create([
                 'id' => $this->getIdAsTimestamp(),
                 'title' => $request->get('title'),
-                'parent-id' => $request->get('parent-id'),
+                'parent_id' => $request->get('parent-id'),
                 'description' => $request->get('description'),
                 'action' => $request->get('action'),
                 'updated_by' => Auth::user()->id

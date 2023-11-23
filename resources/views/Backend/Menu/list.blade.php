@@ -7,9 +7,13 @@
     <h1 class="my-2 font-medium text-lg">{{ $titleHeader }}</h1>
     <div class="grid grid-cols-2 gap-2">
         <div class="">
-            @foreach ($menus as $menu)
-                {{ $menu->title }}
-            @endforeach
+            <div class="form-group">
+                <label class="form-label" for="category">Lựa chọn danh mục</label>
+                <select class="customSelect" id="category" name="category">
+                    <option value="">Không có</option>
+                </select>
+            </div>
+            @each('Backend.Menu.menu-list', $menus, 'menu','Backend.Menu.menu-list')
         </div>
         <div class="flex justify-center items-center w-full h-full">
             <button type="button" id="btn__formMenu-open"
@@ -18,39 +22,39 @@
             </button>
         </div>
         <div id="formMenu" class="flex flex-col gap-2">
-            <div class="flex flex-col gap-1">
-                <label class="text-sm font-medium" for="title">
-                    Tên menu
+            <div class="form-group">
+                <label class="form-label" for="title">
+                    Title Menu
                 </label>
-                <input value="" class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md"
+                <input value="" class="form-input"
                     type="text" id="title" name="title" placeholder="Tên menu" />
             </div>
-            <div class="flex flex-col gap-1">
-                <label class="text-sm font-medium" for="description">
+            <div class="form-group">
+                <label class="form-label" for="description">
                     Mô tả menu
                 </label>
-                <textarea class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md" id="description"
+                <textarea class="form-input" id="description"
                     rows="5" name="description" placeholder="Mô tả"></textarea>
             </div>
-            <div class="flex flex-col gap-1">
-                <label class="text-sm font-medium" for="parentId">
+            <div class="form-group">
+                <label class="form-label" for="parentId">
                     Là menu con của
                 </label>
                 <select class="customSelect" id="parentId" name="parentId">
                     <option value="">Không có</option>
-                    @foreach ($menus as $menu)
-                        <option value="{{ $menu->id }}">{{ $menu->title }}</option>
+                    @foreach ($optionMenu as $option)
+                        <option value="{{ $option->id }}">{{ $option->title }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="flex flex-col gap-1">
-                <label class="text-sm font-medium" for="action">
+            <div class="form-group">
+                <label class="form-label" for="action">
                     Action dẫn URL (theo route)
                 </label>
-                <input value="" class="rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md"
+                <input value="" class="form-input"
                     type="text" id="action" name="action" placeholder="Route" />
             </div>
-            <div class="">
+            <div class="mt-2 flex items-center gap-2">
                 <button type="button" id="btn__formMenu-close"
                     class="px-4 py-2 rounded-lg bg-gray-500/50 text-white text-sm font-medium duration-200 outline-none border-none hover:-translate-y-0.5 hover:shadow-lg ">
                     Huỷ
@@ -86,12 +90,13 @@
             },
             valdation: function() {
                 let status = true;
+                const _this = this;
                 if ($('#title').val().trim() === '') {
                     app.showToast('Title ko được để trống', 'error');
-                    this.showError('title', true);
+                    _this.showError('title', true);
                     status = false;
                 } else {
-                    this.showError('title', false);
+                    _this.showError('title', false);
                     status = true;
                 }
                 return status;
@@ -104,7 +109,7 @@
                         url: "{{ route('menu/add-ajax') }}",
                         data: {
                             "title": $('#title').val(),
-                            "parent-id": $('#parent-id').val(),
+                            "parent-id": $('#parentId').val(),
                             "description": $('#description').val(),
                             "action": $('#action').val(),
                         },
@@ -115,7 +120,10 @@
                         dataType: "json",
                         success: function(res) {
                             if (res.status === true) {
-                                app.showToast(`${res.message}`, 'success');
+                                app.showToast(`${res.message} , Reload trang trong 2s`, 'success');
+                                setTimeout(()=>{
+                                    location.reload();
+                                },2000)
                             } else {
                                 for (const key in res.message) {
                                     if (res.message.hasOwnProperty(key)) {
@@ -126,23 +134,10 @@
                             }
                         },
                         error: function(xhr, status, error) {
-                            app.showToast('Title ko được để trống', 'error');
+                            app.showToast('Lỗi khi tạo menu', 'error');
                         }
                     });
-                } else {
-
                 }
-            },
-            getAllMenu: function() {
-                $.ajax({
-                    type: "method",
-                    url: "url",
-                    data: "data",
-                    dataType: "dataType",
-                    success: function (response) {
-                        
-                    }
-                });
             },
             start: function() {
                 const _this = this;

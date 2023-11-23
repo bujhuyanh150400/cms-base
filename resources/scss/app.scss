@@ -98,3 +98,13 @@
         }
     }
 }
+
+.form-group{
+    @apply flex flex-col gap-1;
+    .form-label{
+        @apply text-sm font-medium;
+    }
+    .form-input{
+        @apply rounded-lg p-2 outline-purple-300 text-sm border duration-200 focus:shadow-md;
+    }
+}

@@ -14,19 +14,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user', function (Blueprint $table) {
+            $table->comment('table dùng để lưu trữ nhân sự');
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamp('birth');
-            $table->text('avatar')->default();
-            $table->smallInteger('gender')->default(1);
-            $table->integer('access_login');
-            $table->string('phone')->default(null);
-            $table->text('address')->default(null);
+            $table->string('name')->comment('Tên nhân sự');
+            $table->string('email')->unique()->comment('Email nhân sự ( dùng để đăng nhập)');
+            $table->string('password')->comment('Password nhân sự');
+            $table->timestamp('birth')->comment('Ngày sinh nhân sự');
+            $table->text('avatar')->nullable()->comment('Avatar của nhân sự');
+            $table->smallInteger('gender')->default(1)->comment('Giới tính: 1 - Nam | 2 - nữ');
+            $table->integer('access_login')->comment('Quyền đăng nhập');
+            $table->string('phone')->nullable()->comment('SĐT Nhân viên');
+            $table->text('address')->nullable()->comment('Địa chỉ nơi ở nhân viên');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(null);
-            $table->bigInteger('updated_by')->default(null);
+            $table->timestamp('updated_at')->nullable();
+            $table->bigInteger('updated_by')->nullable()->comment('Người tạo + người cập nhật thông tin');
             $table->rememberToken();
         });
     }
