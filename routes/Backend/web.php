@@ -37,8 +37,9 @@ Route::middleware('auth.admin')->group(function () {
             Route::post('register-submit', [HRMController::class, 'registerRole'])->name('role/register-submit');
         });
 
-        Route::prefix('menu')->group(function (){
-            Route::get('list',[MenuController::class,'list'])->name('menu/list');
+        Route::prefix('menu')->group(function () {
+            Route::get('list', [MenuController::class, 'show'])->name('menu/show');
+            Route::post('add-ajax', [MenuController::class, 'addAjax'])->name('menu/add-ajax');
         });
     });
 });

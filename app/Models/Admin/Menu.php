@@ -22,6 +22,7 @@ class Menu extends Model
         'id',
         'title',
         'description',
+        'action',
         'parent_id',
         'updated_at',
         'updated_by',

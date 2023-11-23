@@ -18,37 +18,37 @@ class Navbar extends Component
                 'title' => trans('lang_admin.dashboard_title'),
                 'icon' => '<i class="bi bi-speedometer2"></i>',
                 'action' => route('admin-dashboard'),
-                'route_name'=>'admin-dashboard'
+                'route_name' => 'admin-dashboard'
             ],
             [
                 'title' => trans('lang_admin.internal'),
-                'space_menu'=> true,
+                'space_menu' => true,
 
             ],
             [
                 'title' => trans('lang_admin.user-manager'),
                 'icon' => '<i class="bi bi-people"></i>',
-                'sub_menu'=>[
+                'sub_menu' => [
                     [
-                        'title'=>trans('lang_admin.list-user'),
+                        'title' => trans('lang_admin.list-user'),
                         'action' => route('users/list'),
-                        'route_name'=>'users'
+                        'route_name' => 'users'
                     ],
-                     [
-                         'title'=>trans('lang_admin.list-role'),
-                         'action' => route('role/list'),
-                         'route_name'=>'role'
-                     ],
+                    [
+                        'title' => trans('lang_admin.list-role'),
+                        'action' => route('role/list'),
+                        'route_name' => 'role'
+                    ],
                 ]
             ],
             [
                 'title' => 'Quản lý sản phẩm',
                 'icon' => '<i class="bi bi-box"></i>',
-                'sub_menu'=>[
+                'sub_menu' => [
                     [
-                        'title'=> 'Quản lý menu',
-                        'action' => route('menu/list'),
-                        'route_name'=>'menu'
+                        'title' => 'Quản lý menu',
+                        'action' => route('menu/show'),
+                        'route_name' => 'menu'
                     ],
                 ]
             ],
@@ -62,8 +62,8 @@ class Navbar extends Component
         $parts = explode('/', $route_name);
         $current_route = reset($parts);
         return view('components.backend.section.navbar', [
-            'list_menu'=> $this->arrayNavMenu,
-            'curret_route'=>$current_route,
+            'list_menu' => $this->arrayNavMenu,
+            'curret_route' => $current_route,
         ]);
     }
 }

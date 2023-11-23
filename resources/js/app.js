@@ -13,7 +13,7 @@ $(document).ready(function () {
         altInput: true,
         altFormat: "d-m-Y",
         dateFormat: "Y-m-d",
-        locale:Vietnam,
+        locale: Vietnam,
     });
 });
 
